@@ -123,3 +123,11 @@ jobs:
       with:
         name: MSIX Package ${{ matrix.configuration }} ${{ matrix.targetplatform }} ${{ steps.nbgv.outputs.SimpleVersion }}.0
         path: ${{ env.Wap_Project_Directory }}\AppPackages
+
+    - name: Release
+      env:
+        GITHUB_TOKEN: "${{ secrets.RELEASE_REPO_SECRET }}"
+      run: |
+       cp ${{ env.Wap_Project_Directory }}\AppPackages\*\*.msix xt.msix
+       zip -r xt.zip ${{ env.Wap_Project_Directory }}\AppPackages
+       gh release create --latest  ${{ steps.nbgv.outputs.SimpleVersion }}.0 xt.msix xt.zip
