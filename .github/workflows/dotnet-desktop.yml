@@ -121,5 +121,5 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: MSIX Package ${{ matrix.configuration }} ${{ matrix.targetplatform }}
+        name: MSIX Package ${{ matrix.configuration }} ${{ matrix.targetplatform }} ${{ steps.nbgv.outputs.SimpleVersion }}.0
         path: ${{ env.Wap_Project_Directory }}\AppPackages
