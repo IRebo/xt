@@ -13,3 +13,4 @@
 *.pfx
 /setup/setup/SigningCertificate_Encoded.txt
 /.vs
+/setup/setup/BundleArtifacts
