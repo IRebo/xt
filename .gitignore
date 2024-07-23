@@ -10,3 +10,7 @@
 /setup/setup/obj
 *.cache
 *.user
+/setup/setup/AppPackages/setup_1.0.4.0_Debug_Test
+/setup/setup/bin/x64/Debug
+*.pfx
+/setup/setup/SigningCertificate_Encoded.txt
