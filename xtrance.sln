@@ -1,14 +1,12 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 17
-VisualStudioVersion = 15.0.27130.2026
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xtrance", "xtrance.csproj", "{049D30C5-514B-4253-9007-459665D8CBCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xtrance", "xtrance.csproj", "{049D30C5-514B-4253-9007-459665D8CBCD}"
+EndProject
+Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "setup", "setup\setup\setup.wapproj", "{ABEBE991-B86E-4AAC-8A29-D4E961E4100E}"
 EndProject
 Global
-	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
-		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -18,8 +16,20 @@ Global
 		{049D30C5-514B-4253-9007-459665D8CBCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{049D30C5-514B-4253-9007-459665D8CBCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{049D30C5-514B-4253-9007-459665D8CBCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABEBE991-B86E-4AAC-8A29-D4E961E4100E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABEBE991-B86E-4AAC-8A29-D4E961E4100E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABEBE991-B86E-4AAC-8A29-D4E961E4100E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ABEBE991-B86E-4AAC-8A29-D4E961E4100E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABEBE991-B86E-4AAC-8A29-D4E961E4100E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABEBE991-B86E-4AAC-8A29-D4E961E4100E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99635C88-EE37-4226-89AA-C55942B44B94}
+	EndGlobalSection
+	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
+		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
 	EndGlobalSection
 EndGlobal

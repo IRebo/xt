@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using xtrance.Properties;
 
 namespace xtrance
 {
@@ -11,12 +12,29 @@ namespace xtrance
         public Form1()
         {
             InitializeComponent();
-#if DEBUG
-            textBoxUser.Text = "hujerhoe";
-            textBoxPassword.Text = "jio23jeo23jej";
-#endif
+            textBoxUser.Text = Properties.Settings.Default.username;
+            textBoxUser.TextChanged += TextBox_TextChanged;
+            textBoxPassword.Text = Properties.Settings.Default.password;
+            textBoxPassword.TextChanged += TextBox_TextChanged;
+            textBoxServer.Text = Properties.Settings.Default.serverid;
+            textBoxServer.TextChanged += TextBox_TextChanged;
+
+            textBoxFrom.Text = Properties.Settings.Default.from;
+            textBoxFrom.TextChanged += TextBox_TextChanged;
+
+            textBoxTo.Text = Properties.Settings.Default.to;
+            textBoxTo.TextChanged += TextBox_TextChanged;
         }
 
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.username = textBoxUser.Text;
+            Properties.Settings.Default.password = textBoxPassword.Text;
+            Properties.Settings.Default.serverid = textBoxServer.Text;
+            Properties.Settings.Default.from = textBoxFrom.Text;
+            Properties.Settings.Default.to = textBoxTo.Text;
+            Properties.Settings.Default.Save();
+        }
         private void Log(string str)
         {
             textBoxLog.Invoke((Action)(() => textBoxLog.AppendText(str + "\r\n")));

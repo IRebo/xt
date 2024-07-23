@@ -75,7 +75,7 @@ namespace xtrance
                     retryCount++;
                     if (retryCount > Retries)
                     {
-                        throw ex;
+                        throw;
                     }
                     else
                     {

@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/xtrance/DesignTimeBuild
+/.vs/xtrance
+/bin
+/obj
+/setup/setup/bin/AnyCPU/Debug
+/setup/setup/obj
+*.cache
+*.user
