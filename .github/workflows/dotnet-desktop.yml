@@ -75,6 +75,7 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
+        cache: true
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
@@ -128,6 +129,9 @@ jobs:
       env:
         GITHUB_TOKEN: "${{ secrets.RELEASE_REPO_SECRET }}"
       run: |
+       rm -ErrorAction ignore xt.msix
+       rm -ErrorAction ignore xt.zip
+
        cp ${{ env.Wap_Project_Directory }}\AppPackages\*\*.msix xt.msix
-       zip -r xt.zip ${{ env.Wap_Project_Directory }}\AppPackages
+       Compress-Archive -Path ${{ env.Wap_Project_Directory }}\AppPackages -DestinationPath xt.zip
        gh release create --latest  ${{ steps.nbgv.outputs.SimpleVersion }}.0 xt.msix xt.zip
