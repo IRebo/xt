@@ -127,7 +127,7 @@ jobs:
 
     - name: Release
       env:
-        GITHUB_TOKEN: "${{ secrets.RELEASE_REPO_SECRET }}"
+        GH_TOKEN: ${{ github.token }}
       run: |
        rm -ErrorAction ignore xt.msix
        rm -ErrorAction ignore xt.zip
