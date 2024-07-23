@@ -2,8 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/xtrance/DesignTimeBuild
-/.vs/xtrance
 /bin
 /obj
 /setup/setup/bin/AnyCPU/Debug
@@ -14,3 +12,4 @@
 /setup/setup/bin/x64/Debug
 *.pfx
 /setup/setup/SigningCertificate_Encoded.txt
+/.vs

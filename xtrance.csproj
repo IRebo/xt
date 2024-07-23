@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
-    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <OutputType>WinExe</OutputType>
     <UseWindowsForms>true</UseWindowsForms>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
@@ -10,6 +9,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="setup\**" />
+    <EmbeddedResource Remove="setup\**" />
+    <None Remove="setup\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".github\workflows\dotnet-desktop.yml" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
   </ItemGroup>
