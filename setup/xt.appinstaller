@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <AppInstaller
 	Uri="https://github.com/IRebo/xt/releases/latest/download/xt.appinstaller"
-	Version="1.0.5.0" xmlns="http://schemas.microsoft.com/appx/appinstaller/2017/2">
+	Version="1.0.5.0" xmlns="http://schemas.microsoft.com/appx/appinstaller/2018">
 	<MainPackage
 		Name="f312fa48-c3ed-4270-9b33-47d4584dc41c"
 		Version="1.0.5.0"
