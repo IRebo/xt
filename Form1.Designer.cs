@@ -28,205 +28,222 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.textBoxURL = new System.Windows.Forms.TextBox();
-            this.textBoxUser = new System.Windows.Forms.TextBox();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.textBoxLog = new System.Windows.Forms.TextBox();
-            this.labelURL = new System.Windows.Forms.Label();
-            this.labelUser = new System.Windows.Forms.Label();
-            this.labelPassword = new System.Windows.Forms.Label();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.textBoxFrom = new System.Windows.Forms.TextBox();
-            this.textBoxTo = new System.Windows.Forms.TextBox();
-            this.labelFrom = new System.Windows.Forms.Label();
-            this.labelTo = new System.Windows.Forms.Label();
-            this.textBoxSleep = new System.Windows.Forms.TextBox();
-            this.labelSleep = new System.Windows.Forms.Label();
-            this.labelServer = new System.Windows.Forms.Label();
-            this.textBoxServer = new System.Windows.Forms.TextBox();
-            this.SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            buttonOK = new System.Windows.Forms.Button();
+            textBoxURL = new System.Windows.Forms.TextBox();
+            textBoxUser = new System.Windows.Forms.TextBox();
+            textBoxPassword = new System.Windows.Forms.TextBox();
+            textBoxLog = new System.Windows.Forms.TextBox();
+            labelURL = new System.Windows.Forms.Label();
+            labelUser = new System.Windows.Forms.Label();
+            labelPassword = new System.Windows.Forms.Label();
+            buttonCancel = new System.Windows.Forms.Button();
+            textBoxFrom = new System.Windows.Forms.TextBox();
+            textBoxTo = new System.Windows.Forms.TextBox();
+            labelFrom = new System.Windows.Forms.Label();
+            labelTo = new System.Windows.Forms.Label();
+            textBoxSleep = new System.Windows.Forms.TextBox();
+            labelSleep = new System.Windows.Forms.Label();
+            labelServer = new System.Windows.Forms.Label();
+            textBoxServer = new System.Windows.Forms.TextBox();
+            SuspendLayout();
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(31, 215);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(153, 33);
-            this.buttonOK.TabIndex = 0;
-            this.buttonOK.Text = "Start";
-            this.buttonOK.UseVisualStyleBackColor = true;
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
+            buttonOK.Location = new System.Drawing.Point(52, 413);
+            buttonOK.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            buttonOK.Name = "buttonOK";
+            buttonOK.Size = new System.Drawing.Size(255, 63);
+            buttonOK.TabIndex = 0;
+            buttonOK.Text = "Start";
+            buttonOK.UseVisualStyleBackColor = true;
+            buttonOK.Click += buttonOK_Click;
             // 
             // textBoxURL
             // 
-            this.textBoxURL.Location = new System.Drawing.Point(125, 12);
-            this.textBoxURL.Name = "textBoxURL";
-            this.textBoxURL.ReadOnly = true;
-            this.textBoxURL.Size = new System.Drawing.Size(175, 20);
-            this.textBoxURL.TabIndex = 1;
-            this.textBoxURL.Text = "https://xtrance.info";
+            textBoxURL.Location = new System.Drawing.Point(208, 23);
+            textBoxURL.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            textBoxURL.Name = "textBoxURL";
+            textBoxURL.ReadOnly = true;
+            textBoxURL.Size = new System.Drawing.Size(289, 31);
+            textBoxURL.TabIndex = 1;
+            textBoxURL.Text = "https://xtrance.info";
             // 
             // textBoxUser
             // 
-            this.textBoxUser.Location = new System.Drawing.Point(125, 38);
-            this.textBoxUser.Name = "textBoxUser";
-            this.textBoxUser.Size = new System.Drawing.Size(175, 20);
-            this.textBoxUser.TabIndex = 2;
+            textBoxUser.Location = new System.Drawing.Point(208, 73);
+            textBoxUser.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            textBoxUser.Name = "textBoxUser";
+            textBoxUser.Size = new System.Drawing.Size(289, 31);
+            textBoxUser.TabIndex = 2;
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(125, 64);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.PasswordChar = '*';
-            this.textBoxPassword.Size = new System.Drawing.Size(175, 20);
-            this.textBoxPassword.TabIndex = 3;
+            textBoxPassword.Location = new System.Drawing.Point(208, 123);
+            textBoxPassword.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            textBoxPassword.Name = "textBoxPassword";
+            textBoxPassword.PasswordChar = '*';
+            textBoxPassword.Size = new System.Drawing.Size(289, 31);
+            textBoxPassword.TabIndex = 3;
             // 
             // textBoxLog
             // 
-            this.textBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLog.Location = new System.Drawing.Point(31, 274);
-            this.textBoxLog.Multiline = true;
-            this.textBoxLog.Name = "textBoxLog";
-            this.textBoxLog.ReadOnly = true;
-            this.textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxLog.Size = new System.Drawing.Size(730, 370);
-            this.textBoxLog.TabIndex = 4;
+            textBoxLog.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            textBoxLog.Location = new System.Drawing.Point(52, 527);
+            textBoxLog.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            textBoxLog.Multiline = true;
+            textBoxLog.Name = "textBoxLog";
+            textBoxLog.ReadOnly = true;
+            textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            textBoxLog.Size = new System.Drawing.Size(1214, 708);
+            textBoxLog.TabIndex = 4;
             // 
             // labelURL
             // 
-            this.labelURL.AutoSize = true;
-            this.labelURL.Location = new System.Drawing.Point(84, 15);
-            this.labelURL.Name = "labelURL";
-            this.labelURL.Size = new System.Drawing.Size(35, 13);
-            this.labelURL.TabIndex = 5;
-            this.labelURL.Text = "URL :";
+            labelURL.AutoSize = true;
+            labelURL.Location = new System.Drawing.Point(140, 29);
+            labelURL.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            labelURL.Name = "labelURL";
+            labelURL.Size = new System.Drawing.Size(52, 25);
+            labelURL.TabIndex = 5;
+            labelURL.Text = "URL :";
             // 
             // labelUser
             // 
-            this.labelUser.AutoSize = true;
-            this.labelUser.Location = new System.Drawing.Point(60, 41);
-            this.labelUser.Name = "labelUser";
-            this.labelUser.Size = new System.Drawing.Size(61, 13);
-            this.labelUser.TabIndex = 6;
-            this.labelUser.Text = "Username :";
+            labelUser.AutoSize = true;
+            labelUser.Location = new System.Drawing.Point(100, 79);
+            labelUser.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            labelUser.Name = "labelUser";
+            labelUser.Size = new System.Drawing.Size(100, 25);
+            labelUser.TabIndex = 6;
+            labelUser.Text = "Username :";
             // 
             // labelPassword
             // 
-            this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(60, 67);
-            this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(59, 13);
-            this.labelPassword.TabIndex = 7;
-            this.labelPassword.Text = "Password :";
+            labelPassword.AutoSize = true;
+            labelPassword.Location = new System.Drawing.Point(100, 129);
+            labelPassword.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            labelPassword.Name = "labelPassword";
+            labelPassword.Size = new System.Drawing.Size(96, 25);
+            labelPassword.TabIndex = 7;
+            labelPassword.Text = "Password :";
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(201, 215);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(153, 33);
-            this.buttonCancel.TabIndex = 8;
-            this.buttonCancel.Text = "Stop";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            buttonCancel.Location = new System.Drawing.Point(335, 413);
+            buttonCancel.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new System.Drawing.Size(255, 63);
+            buttonCancel.TabIndex = 8;
+            buttonCancel.Text = "Stop";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // textBoxFrom
             // 
-            this.textBoxFrom.Location = new System.Drawing.Point(125, 116);
-            this.textBoxFrom.Name = "textBoxFrom";
-            this.textBoxFrom.Size = new System.Drawing.Size(175, 20);
-            this.textBoxFrom.TabIndex = 9;
-            this.textBoxFrom.Text = "1";
+            textBoxFrom.Location = new System.Drawing.Point(208, 223);
+            textBoxFrom.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            textBoxFrom.Name = "textBoxFrom";
+            textBoxFrom.Size = new System.Drawing.Size(289, 31);
+            textBoxFrom.TabIndex = 9;
+            textBoxFrom.Text = "1";
             // 
             // textBoxTo
             // 
-            this.textBoxTo.Location = new System.Drawing.Point(125, 142);
-            this.textBoxTo.Name = "textBoxTo";
-            this.textBoxTo.Size = new System.Drawing.Size(175, 20);
-            this.textBoxTo.TabIndex = 10;
-            this.textBoxTo.Text = "1";
+            textBoxTo.Location = new System.Drawing.Point(208, 273);
+            textBoxTo.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            textBoxTo.Name = "textBoxTo";
+            textBoxTo.Size = new System.Drawing.Size(289, 31);
+            textBoxTo.TabIndex = 10;
+            textBoxTo.Text = "1";
             // 
             // labelFrom
             // 
-            this.labelFrom.AutoSize = true;
-            this.labelFrom.Location = new System.Drawing.Point(83, 119);
-            this.labelFrom.Name = "labelFrom";
-            this.labelFrom.Size = new System.Drawing.Size(36, 13);
-            this.labelFrom.TabIndex = 11;
-            this.labelFrom.Text = "From :";
-            this.labelFrom.Click += new System.EventHandler(this.labelFrom_Click);
+            labelFrom.AutoSize = true;
+            labelFrom.Location = new System.Drawing.Point(138, 229);
+            labelFrom.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            labelFrom.Name = "labelFrom";
+            labelFrom.Size = new System.Drawing.Size(63, 25);
+            labelFrom.TabIndex = 11;
+            labelFrom.Text = "From :";
+            labelFrom.Click += labelFrom_Click;
             // 
             // labelTo
             // 
-            this.labelTo.AutoSize = true;
-            this.labelTo.Location = new System.Drawing.Point(93, 145);
-            this.labelTo.Name = "labelTo";
-            this.labelTo.Size = new System.Drawing.Size(26, 13);
-            this.labelTo.TabIndex = 12;
-            this.labelTo.Text = "To :";
+            labelTo.AutoSize = true;
+            labelTo.Location = new System.Drawing.Point(155, 279);
+            labelTo.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            labelTo.Name = "labelTo";
+            labelTo.Size = new System.Drawing.Size(39, 25);
+            labelTo.TabIndex = 12;
+            labelTo.Text = "To :";
             // 
             // textBoxSleep
             // 
-            this.textBoxSleep.Location = new System.Drawing.Point(530, 12);
-            this.textBoxSleep.Name = "textBoxSleep";
-            this.textBoxSleep.Size = new System.Drawing.Size(175, 20);
-            this.textBoxSleep.TabIndex = 13;
-            this.textBoxSleep.Text = "1";
+            textBoxSleep.Location = new System.Drawing.Point(883, 23);
+            textBoxSleep.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            textBoxSleep.Name = "textBoxSleep";
+            textBoxSleep.Size = new System.Drawing.Size(289, 31);
+            textBoxSleep.TabIndex = 13;
+            textBoxSleep.Text = "1";
             // 
             // labelSleep
             // 
-            this.labelSleep.AutoSize = true;
-            this.labelSleep.Location = new System.Drawing.Point(413, 15);
-            this.labelSleep.Name = "labelSleep";
-            this.labelSleep.Size = new System.Drawing.Size(111, 13);
-            this.labelSleep.TabIndex = 14;
-            this.labelSleep.Text = "Sleep time (seconds) :";
+            labelSleep.AutoSize = true;
+            labelSleep.Location = new System.Drawing.Point(688, 29);
+            labelSleep.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            labelSleep.Name = "labelSleep";
+            labelSleep.Size = new System.Drawing.Size(184, 25);
+            labelSleep.TabIndex = 14;
+            labelSleep.Text = "Sleep time (seconds) :";
             // 
             // labelServer
             // 
-            this.labelServer.AutoSize = true;
-            this.labelServer.Location = new System.Drawing.Point(466, 44);
-            this.labelServer.Name = "labelServer";
-            this.labelServer.Size = new System.Drawing.Size(58, 13);
-            this.labelServer.TabIndex = 16;
-            this.labelServer.Text = "Server ID :";
+            labelServer.AutoSize = true;
+            labelServer.Location = new System.Drawing.Point(777, 85);
+            labelServer.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            labelServer.Name = "labelServer";
+            labelServer.Size = new System.Drawing.Size(93, 25);
+            labelServer.TabIndex = 16;
+            labelServer.Text = "Server ID :";
             // 
             // textBoxServer
             // 
-            this.textBoxServer.Location = new System.Drawing.Point(530, 41);
-            this.textBoxServer.Name = "textBoxServer";
-            this.textBoxServer.Size = new System.Drawing.Size(175, 20);
-            this.textBoxServer.TabIndex = 15;
-            this.textBoxServer.Text = "14";
+            textBoxServer.Location = new System.Drawing.Point(883, 79);
+            textBoxServer.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            textBoxServer.Name = "textBoxServer";
+            textBoxServer.Size = new System.Drawing.Size(289, 31);
+            textBoxServer.TabIndex = 15;
+            textBoxServer.Text = "14";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(776, 662);
-            this.Controls.Add(this.labelServer);
-            this.Controls.Add(this.textBoxServer);
-            this.Controls.Add(this.labelSleep);
-            this.Controls.Add(this.textBoxSleep);
-            this.Controls.Add(this.labelTo);
-            this.Controls.Add(this.labelFrom);
-            this.Controls.Add(this.textBoxTo);
-            this.Controls.Add(this.textBoxFrom);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.labelPassword);
-            this.Controls.Add(this.labelUser);
-            this.Controls.Add(this.labelURL);
-            this.Controls.Add(this.textBoxLog);
-            this.Controls.Add(this.textBoxPassword);
-            this.Controls.Add(this.textBoxUser);
-            this.Controls.Add(this.textBoxURL);
-            this.Controls.Add(this.buttonOK);
-            this.Name = "Form1";
-            this.Text = "Xtrance stuff";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1293, 1273);
+            Controls.Add(labelServer);
+            Controls.Add(textBoxServer);
+            Controls.Add(labelSleep);
+            Controls.Add(textBoxSleep);
+            Controls.Add(labelTo);
+            Controls.Add(labelFrom);
+            Controls.Add(textBoxTo);
+            Controls.Add(textBoxFrom);
+            Controls.Add(buttonCancel);
+            Controls.Add(labelPassword);
+            Controls.Add(labelUser);
+            Controls.Add(labelURL);
+            Controls.Add(textBoxLog);
+            Controls.Add(textBoxPassword);
+            Controls.Add(textBoxUser);
+            Controls.Add(textBoxURL);
+            Controls.Add(buttonOK);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            Name = "Form1";
+            Text = "Xtrance stuff";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
