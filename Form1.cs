@@ -3,6 +3,8 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows.ApplicationModel;
+using Windows.Management.Deployment;
 using xtrance.Properties;
 
 namespace xtrance
@@ -12,7 +14,7 @@ namespace xtrance
         public Form1()
         {
             InitializeComponent();
-            Text = Text+" - "+ Application.ProductVersion;
+            Text = Text + " - " + Application.ProductVersion;
 
             textBoxUser.Text = Properties.Settings.Default.username;
             textBoxUser.TextChanged += TextBox_TextChanged;
@@ -26,6 +28,28 @@ namespace xtrance
 
             textBoxTo.Text = Properties.Settings.Default.to;
             textBoxTo.TextChanged += TextBox_TextChanged;
+
+            new Thread(() =>
+            {
+                try
+                {
+                    PackageManager packageManager = new PackageManager();
+                    Package currentPackage = packageManager.FindPackageForUser(string.Empty, Package.Current.Id.FullName);
+
+                    PackageUpdateAvailabilityResult status = currentPackage.CheckUpdateAvailabilityAsync().GetResults();
+                    labelUpdate.Invoke((Action)(() => labelUpdate.Text = status.ToString()));
+                    if (status.Availability == PackageUpdateAvailability.Required || status.Availability == PackageUpdateAvailability.Available)
+                    {
+                        buttonUpdate.Visible = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    labelUpdate.Invoke((Action)(() => labelUpdate.Text = $"error {ex}"));
+                }
+            })
+            { IsBackground = true }.Start();
+
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
@@ -52,7 +76,7 @@ namespace xtrance
             string pass = textBoxPassword.Text;
             int serverId = Int32.Parse(textBoxServer.Text);
 
-            _task = Task.Run(async () => 
+            _task = Task.Run(async () =>
             {
                 try
                 {
@@ -64,7 +88,8 @@ namespace xtrance
                     await Parallel.ForEachAsync(books.Values, new ParallelOptions()
                     {
                         MaxDegreeOfParallelism = 5
-                    }, async (book,ct) => {
+                    }, async (book, ct) =>
+                    {
                         _cancellationToken.Token.ThrowIfCancellationRequested();
                         //Thread.Sleep(sleeptime);
                         await xtrance.FillBookInfo(metaBooks, book);
@@ -81,12 +106,13 @@ namespace xtrance
                     await Parallel.ForEachAsync(metaBooks.Values, new ParallelOptions()
                     {
                         MaxDegreeOfParallelism = 5
-                    }, async (metaBook, ct) => {
+                    }, async (metaBook, ct) =>
+                    {
                         _cancellationToken.Token.ThrowIfCancellationRequested();
                         //Thread.Sleep(sleeptime);
                         await xtrance.FillBookMeta(metaBook);
                     });
-                    
+
                     /*foreach (MetaBook metaBook in metaBooks.Values)
                                         {
                                             _cancellationToken.Token.ThrowIfCancellationRequested();
@@ -157,5 +183,25 @@ namespace xtrance
             return String.Join("_", input.Split(Path.GetInvalidFileNameChars())).TrimEnd('.').Trim();
         }
 
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            PackageManager pm = new PackageManager();
+            Package currentPackage = pm.FindPackageForUser(string.Empty, Package.Current.Id.FullName);
+
+            DeploymentResult res = pm.AddPackageByAppInstallerFileAsync(
+                currentPackage.GetAppInstallerInfo().Uri,
+                AddPackageByAppInstallerOptions.ForceTargetAppShutdown,
+                pm.GetDefaultPackageVolume()).GetResults();
+
+            if (res.IsRegistered == true)
+            {
+                uint res2 = RelaunchHelper.RegisterApplicationRestart(null, RelaunchHelper.RestartFlags.NONE);
+                labelUpdate.Text = "Please close the application";
+            } else
+            {
+                labelUpdate.Text = $"Error {res.ErrorText}";
+            }
+            
+        }
     }
 }

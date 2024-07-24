@@ -46,6 +46,9 @@
             labelSleep = new System.Windows.Forms.Label();
             labelServer = new System.Windows.Forms.Label();
             textBoxServer = new System.Windows.Forms.TextBox();
+            labelUpdateText = new System.Windows.Forms.Label();
+            labelUpdate = new System.Windows.Forms.Label();
+            buttonUpdate = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // buttonOK
@@ -216,11 +219,46 @@
             textBoxServer.TabIndex = 15;
             textBoxServer.Text = "14";
             // 
+            // labelUpdateText
+            // 
+            labelUpdateText.AutoSize = true;
+            labelUpdateText.Location = new System.Drawing.Point(688, 171);
+            labelUpdateText.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            labelUpdateText.Name = "labelUpdateText";
+            labelUpdateText.Size = new System.Drawing.Size(136, 25);
+            labelUpdateText.TabIndex = 17;
+            labelUpdateText.Text = "Update status : ";
+            // 
+            // labelUpdate
+            // 
+            labelUpdate.AutoSize = true;
+            labelUpdate.Location = new System.Drawing.Point(688, 196);
+            labelUpdate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            labelUpdate.Name = "labelUpdate";
+            labelUpdate.Size = new System.Drawing.Size(96, 25);
+            labelUpdate.TabIndex = 18;
+            labelUpdate.Text = "Checking...";
+            // 
+            // buttonUpdate
+            // 
+            buttonUpdate.Location = new System.Drawing.Point(688, 241);
+            buttonUpdate.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            buttonUpdate.Name = "buttonUpdate";
+            buttonUpdate.Size = new System.Drawing.Size(255, 63);
+            buttonUpdate.TabIndex = 19;
+            buttonUpdate.Text = "Update";
+            buttonUpdate.UseVisualStyleBackColor = true;
+            buttonUpdate.Visible = false;
+            buttonUpdate.Click += buttonUpdate_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1293, 1273);
+            Controls.Add(buttonUpdate);
+            Controls.Add(labelUpdate);
+            Controls.Add(labelUpdateText);
             Controls.Add(labelServer);
             Controls.Add(textBoxServer);
             Controls.Add(labelSleep);
@@ -265,6 +303,9 @@
         private System.Windows.Forms.Label labelSleep;
         private System.Windows.Forms.Label labelServer;
         private System.Windows.Forms.TextBox textBoxServer;
+        private System.Windows.Forms.Label labelUpdateText;
+        private System.Windows.Forms.Label labelUpdate;
+        private System.Windows.Forms.Button buttonUpdate;
     }
 }
 
