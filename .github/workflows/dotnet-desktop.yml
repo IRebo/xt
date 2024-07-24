@@ -151,10 +151,12 @@ jobs:
 
        
        rm -ErrorAction ignore xt.msix
-       rm -ErrorAction ignore xt.zip
+       rm -ErrorAction ignore xt.cer
+       #rm -ErrorAction ignore xt.zip
 
        cp ${{ env.Wap_Project_Directory }}\AppPackages\*\*.msix xt.msix
-       Compress-Archive -Path ${{ env.Wap_Project_Directory }}\AppPackages\* -DestinationPath xt.zip
+       cp ${{ env.Wap_Project_Directory }}\AppPackages\*\*.cer xt.cer
+       #Compress-Archive -Path ${{ env.Wap_Project_Directory }}\AppPackages\* -DestinationPath xt.zip
 
 
        $headers = @{
@@ -169,5 +171,6 @@ jobs:
        $releaseid = $githubRelease.id
        Invoke-RestMethod -Method Post -Uri ${reposAPIUriUploads}/${releaseid}/assets?name=xt.appinstaller -Headers $headers -ContentType "application/appinstaller" -InFile setup/xt.appinstaller
        Invoke-RestMethod -Method Post -Uri ${reposAPIUriUploads}/${releaseid}/assets?name=xt.msix -Headers $headers -ContentType "application/msix" -InFile xt.msix
-       Invoke-RestMethod -Method Post -Uri ${reposAPIUriUploads}/${releaseid}/assets?name=xt.zip -Headers $headers -InFile xt.zip
+       #Invoke-RestMethod -Method Post -Uri ${reposAPIUriUploads}/${releaseid}/assets?name=xt.zip -Headers $headers -InFile xt.zip
+       Invoke-RestMethod -Method Post -Uri ${reposAPIUriUploads}/${releaseid}/assets?name=xt.cer -Headers $headers -InFile xt.cer
 
