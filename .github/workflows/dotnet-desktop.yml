@@ -157,7 +157,7 @@ jobs:
        }
 
        $reposAPIUri = "https://api.github.com/repos/IRebo/xt/releases"
-       $releasecommand = @{tag_name="${{ steps.nbgv.outputs.SimpleVersion }}.0";make_latest=$true}
+       $releasecommand = @{tag_name="${{ steps.nbgv.outputs.SimpleVersion }}.0";make_latest="true"} | ConvertTo-Json
        echo $releasecommand
        $githubRelease = Invoke-RestMethod -Method Post -Uri $reposAPIUri -Headers $headers -body $releasecommand
        echo $githubRelease.id
