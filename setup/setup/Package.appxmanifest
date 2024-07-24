@@ -12,7 +12,7 @@
     Version="1.0.4.0" />
 
   <Properties>
-    <DisplayName>setup</DisplayName>
+    <DisplayName>xtrance</DisplayName>
     <PublisherDisplayName>hoe</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
