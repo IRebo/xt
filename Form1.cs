@@ -60,19 +60,40 @@ namespace xtrance
                     await xtrance.LogingAndGetCookie(user, pass);
                     MetaBooks metaBooks = new MetaBooks();
                     Books books = await xtrance.GetLatestBooks(Int32.Parse(textBoxFrom.Text), Int32.Parse(textBoxTo.Text));
-                    foreach (Book book in books.Values)
+
+                    await Parallel.ForEachAsync(books.Values, new ParallelOptions()
                     {
+                        MaxDegreeOfParallelism = 5
+                    }, async (book,ct) => {
                         _cancellationToken.Token.ThrowIfCancellationRequested();
-                        Thread.Sleep(sleeptime);
+                        //Thread.Sleep(sleeptime);
                         await xtrance.FillBookInfo(metaBooks, book);
-                    }
-                    Log("Collected " + metaBooks.Count + " metabooks...");
-                    foreach (MetaBook metaBook in metaBooks.Values)
-                    {
+                    });
+
+                    /*await Parallel.ForEachAsync(books.Values, async (book, ct) => {
                         _cancellationToken.Token.ThrowIfCancellationRequested();
-                        Thread.Sleep(sleeptime);
+                        //Thread.Sleep(sleeptime);
+                        await xtrance.FillBookInfo(metaBooks, book);
+                    });*/
+
+
+                    Log("Collected " + metaBooks.Count + " metabooks...");
+                    await Parallel.ForEachAsync(metaBooks.Values, new ParallelOptions()
+                    {
+                        MaxDegreeOfParallelism = 5
+                    }, async (metaBook, ct) => {
+                        _cancellationToken.Token.ThrowIfCancellationRequested();
+                        //Thread.Sleep(sleeptime);
                         await xtrance.FillBookMeta(metaBook);
-                    }
+                    });
+                    
+                    /*foreach (MetaBook metaBook in metaBooks.Values)
+                                        {
+                                            _cancellationToken.Token.ThrowIfCancellationRequested();
+                                            Thread.Sleep(sleeptime);
+                                            await xtrance.FillBookMeta(metaBook);
+                                        }*/
+
 
                     foreach (MetaBook metaBook in metaBooks.Values)
                     {

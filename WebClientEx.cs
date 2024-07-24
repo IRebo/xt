@@ -10,36 +10,6 @@ using System.Threading.Tasks;
 
 namespace xtrance
 {
-    /*public class WebClientInternal : WebClient
-    {
-        private CookieContainer _cookieContainer = new CookieContainer();
-        private Log.LogFunction _logFunction;
-
-        public CookieContainer Cookies { get { return _cookieContainer; } }
-
-        public int Timeout { get; set; }
-
-        public WebClientInternal(Log.LogFunction logFunction)
-        {
-            _logFunction = logFunction;
-        }
-
-        protected override WebRequest GetWebRequest(Uri address)
-        {
-            _logFunction($"Sending request '{address}'");
-
-            WebRequest request = base.GetWebRequest(address);
-            request.Timeout = Timeout;
-            if (request is HttpWebRequest myrequest)
-            {
-                myrequest.ReadWriteTimeout = Timeout;
-                myrequest.CookieContainer = _cookieContainer;
-                myrequest.AllowAutoRedirect = false;
-            }
-            return request;
-        }
-    }*/
-
     public class WebClientEx
     {
         private HttpClient _client2;
@@ -57,7 +27,6 @@ namespace xtrance
         public HttpRequestHeaders Headers
         {
             get { return _client2.DefaultRequestHeaders; }
-            //set { _client2.DefaultRequestHeaders = value; }
         }
 
         internal async Task<T> Retry<T>(Func<Task<T>> action)

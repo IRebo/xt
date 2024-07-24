@@ -127,7 +127,7 @@ namespace xtrance
             string masterId = dict["id"];
 
             node = htmlDoc.DocumentNode.SelectSingleNode("//*[text()[contains(.,'Autor:')]]");
-            node = node.ChildNodes["td"].FirstChild;
+            node = node.NextSibling;
             string author = HttpUtility.HtmlDecode(node.InnerText);
 
             node = htmlDoc.DocumentNode.SelectSingleNode("//*[text()[contains(.,'Publikace:')]]");
@@ -137,11 +137,11 @@ namespace xtrance
             metaBooks.FillBook(masterId, book, author, bookname);
 
             node = htmlDoc.DocumentNode.SelectSingleNode("//*[text()[contains(.,'Stav:')]]");
-            node = node.ChildNodes["td"].FirstChild;
+            node = node.NextSibling;
             book.Revision = HttpUtility.HtmlDecode(node.InnerText);
 
             node = htmlDoc.DocumentNode.SelectSingleNode("//*[text()[contains(.,'Formát ebooku:')]]");
-            node = node.ChildNodes["td"].FirstChild;
+            node = node.NextSibling;
             book.Format = HttpUtility.HtmlDecode(node.InnerText.Split(' ')[0]);
 
             book.DownloadLinks = GetBookLinks(book);
