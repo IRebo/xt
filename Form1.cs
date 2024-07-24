@@ -40,7 +40,7 @@ namespace xtrance
                     labelUpdate.Invoke((Action)(() => labelUpdate.Text = status.Availability.ToString()));
                     if (status.Availability == PackageUpdateAvailability.Required || status.Availability == PackageUpdateAvailability.Available)
                     {
-                        buttonUpdate.Visible = true;
+                        buttonUpdate.Invoke((Action)(() => buttonUpdate.Visible = true));
                     }
                 }
                 catch (Exception ex)
