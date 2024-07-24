@@ -160,6 +160,6 @@ jobs:
        $releasecommand = @{tag_name="${{ steps.nbgv.outputs.SimpleVersion }}.0";make_latest="true"} | ConvertTo-Json
        $githubRelease = Invoke-RestMethod -Method Post -Uri $reposAPIUri -Headers $headers -body $releasecommand
        $releaseid = $githubRelease.id
-       $uploaded = Invoke-RestMethod -Method Post -Uri ${{reposAPIUri}}/${{releaseid}}/assets?name=xt.appinstaller -Headers $headers -ContentType "application/xml" -InFile setup/xt.appinstaller
+       $uploaded = Invoke-RestMethod -Method Post -Uri ${reposAPIUri}/${releaseid}/assets?name=xt.appinstaller -Headers $headers -ContentType "application/xml" -InFile setup/xt.appinstaller
        echo $uploaded
 
