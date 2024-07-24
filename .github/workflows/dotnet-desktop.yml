@@ -91,7 +91,7 @@ jobs:
       run: |
         [xml]$installer = get-content ".\setup\xt.appinstaller"
         $installer.AppInstaller.Version = "${{ steps.nbgv.outputs.SimpleVersion }}.0"
-        $installer.AppInstaller.MainBundle.Version = "${{ steps.nbgv.outputs.SimpleVersion }}.0"
+        $installer.AppInstaller.MainPackage.Version = "${{ steps.nbgv.outputs.SimpleVersion }}.0"
         $installer.save(".\setup\xt.appinstaller")
 
     # Execute all unit tests in the solution
