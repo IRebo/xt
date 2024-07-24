@@ -36,7 +36,7 @@ namespace xtrance
                     PackageManager packageManager = new PackageManager();
                     Package currentPackage = packageManager.FindPackageForUser(string.Empty, Package.Current.Id.FullName);
 
-                    PackageUpdateAvailabilityResult status = currentPackage.CheckUpdateAvailabilityAsync().GetResults();
+                    PackageUpdateAvailabilityResult status = currentPackage.CheckUpdateAvailabilityAsync().GetAwaiter().GetResult();
                     labelUpdate.Invoke((Action)(() => labelUpdate.Text = status.ToString()));
                     if (status.Availability == PackageUpdateAvailability.Required || status.Availability == PackageUpdateAvailability.Available)
                     {
@@ -198,7 +198,7 @@ namespace xtrance
                 labelUpdate.Text = $"Progress: {progress.percentage} {progress.state}";
             });
 
-            var res = installTask.GetResults();
+            var res = installTask.GetAwaiter().GetResult();
 
             if (res.IsRegistered == true)
             {
