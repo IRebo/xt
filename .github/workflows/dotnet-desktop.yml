@@ -172,5 +172,5 @@ jobs:
        Invoke-RestMethod -Method Post -Uri ${reposAPIUriUploads}/${releaseid}/assets?name=xt.appinstaller -Headers $headers -ContentType "application/appinstaller" -InFile setup/xt.appinstaller
        Invoke-RestMethod -Method Post -Uri ${reposAPIUriUploads}/${releaseid}/assets?name=xt.msix -Headers $headers -ContentType "application/msix" -InFile xt.msix
        #Invoke-RestMethod -Method Post -Uri ${reposAPIUriUploads}/${releaseid}/assets?name=xt.zip -Headers $headers -InFile xt.zip
-       Invoke-RestMethod -Method Post -Uri ${reposAPIUriUploads}/${releaseid}/assets?name=xt.cer -Headers $headers -InFile xt.cer
+       Invoke-RestMethod -Method Post -Uri ${reposAPIUriUploads}/${releaseid}/assets?name=xt.cer -Headers $headers -ContentType "application/pkix-cert" -InFile xt.cer
 
