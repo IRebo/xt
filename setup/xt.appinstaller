@@ -9,7 +9,6 @@
     ProcessorArchitecture="x64"
 		Uri="https://github.com/IRebo/xt/releases/latest/download/xt.msix" />
 	<UpdateSettings>
-		<OnLaunch
-			HoursBetweenUpdateChecks="0" />
+    <OnLaunch HoursBetweenUpdateChecks="0" ShowPrompt="true" />
 	</UpdateSettings>
 </AppInstaller>
