@@ -188,10 +188,17 @@ namespace xtrance
             PackageManager pm = new PackageManager();
             Package currentPackage = pm.FindPackageForUser(string.Empty, Package.Current.Id.FullName);
 
-            DeploymentResult res = pm.AddPackageByAppInstallerFileAsync(
+            var installTask = pm.AddPackageByAppInstallerFileAsync(
                 currentPackage.GetAppInstallerInfo().Uri,
                 AddPackageByAppInstallerOptions.ForceTargetAppShutdown,
-                pm.GetDefaultPackageVolume()).GetResults();
+                pm.GetDefaultPackageVolume());
+
+            installTask.Progress = (installResult, progress) => labelUpdate.BeginInvoke(() =>
+            {
+                labelUpdate.Text = "Progress: " + progress;
+            });
+
+            var res = installTask.GetResults();
 
             if (res.IsRegistered == true)
             {
