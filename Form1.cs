@@ -12,6 +12,8 @@ namespace xtrance
         public Form1()
         {
             InitializeComponent();
+            Text = Text+" - "+ Application.ProductVersion;
+
             textBoxUser.Text = Properties.Settings.Default.username;
             textBoxUser.TextChanged += TextBox_TextChanged;
             textBoxPassword.Text = Properties.Settings.Default.password;
