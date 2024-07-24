@@ -9,7 +9,7 @@
   <Identity
     Name="f312fa48-c3ed-4270-9b33-47d4584dc41c"
     Publisher="CN=hoe"
-    Version="1.0.5.0" />
+    Version="1.0.6.0" />
 
   <Properties>
     <DisplayName>xtrance</DisplayName>

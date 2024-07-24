@@ -4,14 +4,13 @@
 
 /bin
 /obj
-/setup/setup/bin/AnyCPU/Debug
+/setup/setup/bin
 /setup/setup/obj
 *.cache
 *.user
-/setup/setup/AppPackages/setup_1.0.4.0_Debug_Test
-/setup/setup/bin/x64/Debug
 *.pfx
 /setup/setup/SigningCertificate_Encoded.txt
 /.vs
 /setup/setup/BundleArtifacts
 /setup/setup/AppPackages
+
