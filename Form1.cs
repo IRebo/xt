@@ -195,7 +195,7 @@ namespace xtrance
 
             installTask.Progress = (installResult, progress) => labelUpdate.BeginInvoke(() =>
             {
-                labelUpdate.Text = "Progress: " + progress;
+                labelUpdate.Text = $"Progress: {progress.percentage} {progress.state}";
             });
 
             var res = installTask.GetResults();
