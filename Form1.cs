@@ -37,7 +37,7 @@ namespace xtrance
                     Package currentPackage = packageManager.FindPackageForUser(string.Empty, Package.Current.Id.FullName);
 
                     PackageUpdateAvailabilityResult status = currentPackage.CheckUpdateAvailabilityAsync().GetAwaiter().GetResult();
-                    labelUpdate.Invoke((Action)(() => labelUpdate.Text = status.ToString()));
+                    labelUpdate.Invoke((Action)(() => labelUpdate.Text = status.Availability.ToString()));
                     if (status.Availability == PackageUpdateAvailability.Required || status.Availability == PackageUpdateAvailability.Available)
                     {
                         buttonUpdate.Visible = true;
@@ -45,7 +45,7 @@ namespace xtrance
                 }
                 catch (Exception ex)
                 {
-                    labelUpdate.Invoke((Action)(() => labelUpdate.Text = $"error {ex}"));
+                    labelUpdate.Invoke((Action)(() => labelUpdate.Text = $"error {ex.Message}"));
                 }
             })
             { IsBackground = true }.Start();
@@ -203,7 +203,7 @@ namespace xtrance
             if (res.IsRegistered == true)
             {
                 uint res2 = RelaunchHelper.RegisterApplicationRestart(null, RelaunchHelper.RestartFlags.NONE);
-                labelUpdate.Text = "Please close the application";
+                labelUpdate.Text = "Please close the application to update";
             } else
             {
                 labelUpdate.Text = $"Error {res.ErrorText}";
