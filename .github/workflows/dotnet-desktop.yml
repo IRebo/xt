@@ -87,6 +87,13 @@ jobs:
         $manifest.Package.Identity.Version = "${{ steps.nbgv.outputs.SimpleVersion }}.0"
         $manifest.save(".\$env:Wap_Project_Directory\Package.appxmanifest")
 
+    - name: Update appinstaller version
+      run: |
+        [xml]installer = get-content ".\setup\xt.appinstaller"
+        installer.AppInstaller.Version = "${{ steps.nbgv.outputs.SimpleVersion }}.0"
+        installer.AppInstaller.MainBundle.Version = "${{ steps.nbgv.outputs.SimpleVersion }}.0"
+        installer.save(".\setup\xt.appinstaller")
+
     # Execute all unit tests in the solution
     #- name: Execute unit tests
     #  run: dotnet test
@@ -134,4 +141,4 @@ jobs:
 
        cp ${{ env.Wap_Project_Directory }}\AppPackages\*\*.msix xt.msix
        Compress-Archive -Path ${{ env.Wap_Project_Directory }}\AppPackages\* -DestinationPath xt.zip
-       gh release create --latest  ${{ steps.nbgv.outputs.SimpleVersion }}.0 xt.msix xt.zip
+       gh release create --latest  ${{ steps.nbgv.outputs.SimpleVersion }}.0 xt.msix xt.zip setup/xt.appinstaller

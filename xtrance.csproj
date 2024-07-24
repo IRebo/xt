@@ -12,9 +12,9 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="setup\**" />
-    <EmbeddedResource Remove="setup\**" />
-    <None Remove="setup\**" />
+    <Compile Remove="setup\setup\**" />
+    <EmbeddedResource Remove="setup\setup\**" />
+    <None Remove="setup\setup\**" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".github\workflows\dotnet-desktop.yml" />
