@@ -56,27 +56,31 @@ namespace xtrance
                     PackageManager packageManager = new PackageManager();
                     Package currentPackage = packageManager.FindPackageForUser(string.Empty, Package.Current.Id.FullName);
 
-                    int retries = 0;
-                    while (retries < 5)
+                    while (true)
                     {
-                        if (retries > 0)
-                        {
-                            labelUpdate.Invoke((Action)(() => labelUpdate.Text = labelUpdate.Text + " Retrying..."));
-                        }
-
                         PackageUpdateAvailabilityResult status = currentPackage.CheckUpdateAvailabilityAsync().GetAwaiter().GetResult();
-                        labelUpdate.Invoke((Action)(() => labelUpdate.Text = status.Availability.ToString()));
 
+                        if (status.Availability == PackageUpdateAvailability.Unknown)
+                        {
+                            Thread.Sleep(TimeSpan.FromSeconds(5));
+                        }
+                        else
+                        if (status.Availability == PackageUpdateAvailability.Error)
+                        {
+                            Thread.Sleep(TimeSpan.FromSeconds(1));
+                        }
+                        else
                         if (status.Availability == PackageUpdateAvailability.NoUpdates)
                         {
-                            break;
-                        }
+                            labelUpdate.Invoke((Action)(() => labelUpdate.Text = status.Availability.ToString()));
+                            Thread.Sleep(TimeSpan.FromMinutes(5));
+                        } else
                         if (status.Availability == PackageUpdateAvailability.Required || status.Availability == PackageUpdateAvailability.Available)
                         {
+                            labelUpdate.Invoke((Action)(() => labelUpdate.Text = status.Availability.ToString()));
                             buttonUpdate.Invoke((Action)(() => buttonUpdate.Visible = true));
                             break;
                         }
-                        retries++;
                     }
                 }
                 catch (Exception ex)
@@ -172,7 +176,7 @@ namespace xtrance
                 }
                 catch (Exception ex)
                 {
-                    Log(ex.ToString());
+                    Log(ex.Message);
                 }
             }, _cancellationToken.Token).ContinueWith(_ => {
                 Log("done");
@@ -236,6 +240,7 @@ namespace xtrance
         {
             buttonOK.Enabled = false;
             buttonCancel.Enabled = false;
+            labelUpdate.Text = $"Updating... Application will automatically restart to the new version.";
 
             new Thread(() =>
             {
