@@ -49,6 +49,9 @@
             labelUpdateText = new System.Windows.Forms.Label();
             labelUpdate = new System.Windows.Forms.Label();
             buttonUpdate = new System.Windows.Forms.Button();
+            labelDirectory = new System.Windows.Forms.Label();
+            textBoxDirectory = new System.Windows.Forms.TextBox();
+            buttonDirectory = new System.Windows.Forms.Button();
             SuspendLayout();
             // 
             // buttonOK
@@ -82,7 +85,7 @@
             // 
             // textBoxPassword
             // 
-            textBoxPassword.Location = new System.Drawing.Point(208, 123);
+            textBoxPassword.Location = new System.Drawing.Point(208, 116);
             textBoxPassword.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             textBoxPassword.Name = "textBoxPassword";
             textBoxPassword.PasswordChar = '*';
@@ -98,7 +101,7 @@
             textBoxLog.Name = "textBoxLog";
             textBoxLog.ReadOnly = true;
             textBoxLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            textBoxLog.Size = new System.Drawing.Size(1214, 708);
+            textBoxLog.Size = new System.Drawing.Size(1150, 635);
             textBoxLog.TabIndex = 4;
             // 
             // labelURL
@@ -114,7 +117,7 @@
             // labelUser
             // 
             labelUser.AutoSize = true;
-            labelUser.Location = new System.Drawing.Point(100, 79);
+            labelUser.Location = new System.Drawing.Point(98, 82);
             labelUser.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             labelUser.Name = "labelUser";
             labelUser.Size = new System.Drawing.Size(100, 25);
@@ -124,7 +127,7 @@
             // labelPassword
             // 
             labelPassword.AutoSize = true;
-            labelPassword.Location = new System.Drawing.Point(100, 129);
+            labelPassword.Location = new System.Drawing.Point(102, 122);
             labelPassword.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             labelPassword.Name = "labelPassword";
             labelPassword.Size = new System.Drawing.Size(96, 25);
@@ -251,11 +254,43 @@
             buttonUpdate.Visible = false;
             buttonUpdate.Click += buttonUpdate_Click;
             // 
+            // labelDirectory
+            // 
+            labelDirectory.AutoSize = true;
+            labelDirectory.Location = new System.Drawing.Point(60, 165);
+            labelDirectory.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            labelDirectory.Name = "labelDirectory";
+            labelDirectory.Size = new System.Drawing.Size(138, 25);
+            labelDirectory.TabIndex = 20;
+            labelDirectory.Text = "Write directory :";
+            // 
+            // textBoxDirectory
+            // 
+            textBoxDirectory.Location = new System.Drawing.Point(208, 159);
+            textBoxDirectory.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            textBoxDirectory.Name = "textBoxDirectory";
+            textBoxDirectory.Size = new System.Drawing.Size(289, 31);
+            textBoxDirectory.TabIndex = 21;
+            // 
+            // buttonDirectory
+            // 
+            buttonDirectory.Location = new System.Drawing.Point(507, 165);
+            buttonDirectory.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            buttonDirectory.Name = "buttonDirectory";
+            buttonDirectory.Size = new System.Drawing.Size(37, 31);
+            buttonDirectory.TabIndex = 22;
+            buttonDirectory.Text = "...";
+            buttonDirectory.UseVisualStyleBackColor = true;
+            buttonDirectory.Click += buttonDirectory_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1293, 1273);
+            ClientSize = new System.Drawing.Size(1229, 1200);
+            Controls.Add(buttonDirectory);
+            Controls.Add(textBoxDirectory);
+            Controls.Add(labelDirectory);
             Controls.Add(buttonUpdate);
             Controls.Add(labelUpdate);
             Controls.Add(labelUpdateText);
@@ -306,6 +341,9 @@
         private System.Windows.Forms.Label labelUpdateText;
         private System.Windows.Forms.Label labelUpdate;
         private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.Label labelDirectory;
+        private System.Windows.Forms.TextBox textBoxDirectory;
+        private System.Windows.Forms.Button buttonDirectory;
     }
 }
 

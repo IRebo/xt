@@ -48,7 +48,7 @@ namespace xtrance
                     }
                     else
                     {
-                        _logFunction($"retrying after exception '{ex}'");
+                        _logFunction($"retrying after exception '{ex.Message}'");
                     }
                 }
             }

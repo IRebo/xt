@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
@@ -16,6 +17,16 @@ namespace xtrance
         public Form1()
         {
             InitializeComponent();
+            /*string configPath = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
+
+            if (Properties.Settings.Default.UpdateSettings)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.Reload();
+                Properties.Settings.Default.UpdateSettings = false;
+                Properties.Settings.Default.Save();
+            }*/
+
             Text = Text + " - " + Application.ProductVersion;
 
             textBoxUser.Text = Properties.Settings.Default.username;
@@ -31,6 +42,11 @@ namespace xtrance
             textBoxTo.Text = Properties.Settings.Default.to;
             textBoxTo.TextChanged += TextBox_TextChanged;
 
+            textBoxDirectory.Text = Properties.Settings.Default.FilesPath;
+            textBoxDirectory.TextChanged += TextBox_TextChanged;
+
+
+
             new Thread(() =>
             {
                 try
@@ -38,12 +54,17 @@ namespace xtrance
                     PackageManager packageManager = new PackageManager();
                     Package currentPackage = packageManager.FindPackageForUser(string.Empty, Package.Current.Id.FullName);
 
-                    int retries = 5;
-                    while (retries >= 0)
+                    int retries = 0;
+                    while (retries < 5)
                     {
+                        if (retries > 0)
+                        {
+                            labelUpdate.Invoke((Action)(() => labelUpdate.Text = labelUpdate.Text + " Retrying..."));
+                        }
 
                         PackageUpdateAvailabilityResult status = currentPackage.CheckUpdateAvailabilityAsync().GetAwaiter().GetResult();
                         labelUpdate.Invoke((Action)(() => labelUpdate.Text = status.Availability.ToString()));
+
                         if (status.Availability == PackageUpdateAvailability.NoUpdates)
                         {
                             break;
@@ -53,7 +74,7 @@ namespace xtrance
                             buttonUpdate.Invoke((Action)(() => buttonUpdate.Visible = true));
                             break;
                         }
-                        retries--;
+                        retries++;
                     }
                 }
                 catch (Exception ex)
@@ -64,6 +85,8 @@ namespace xtrance
             { IsBackground = true }.Start();
         }
 
+        private string RootPath => textBoxDirectory.Text+ @"\";
+
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.username = textBoxUser.Text;
@@ -71,6 +94,7 @@ namespace xtrance
             Properties.Settings.Default.serverid = textBoxServer.Text;
             Properties.Settings.Default.from = textBoxFrom.Text;
             Properties.Settings.Default.to = textBoxTo.Text;
+            Properties.Settings.Default.FilesPath = textBoxDirectory.Text;
             Properties.Settings.Default.Save();
         }
         private void Log(string str)
@@ -153,9 +177,9 @@ namespace xtrance
         private void SaveBook(Book book)
         {
             Log("Saving book : " + book.ToString());
-            string path = Sanitize(book.Parent.Author) + @"\" + Sanitize(book.Parent.Name);
-            Directory.CreateDirectory(path);
-            Stream stream = File.Create(path + @"\" + Sanitize(book.Revision) + " - " + Sanitize(book.Format) + ".url");
+            string path = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+Sanitize(book.Parent.Author) + @"\" + Sanitize(book.Parent.Name);
+            Directory.CreateDirectory(RootPath + path);
+            Stream stream = File.Create(RootPath + path + @"\" + Sanitize(book.Revision) + " - " + Sanitize(book.Format) + ".url");
             StreamWriter sw = new StreamWriter(stream);
             sw.WriteLine("[DEFAULT]");
             sw.WriteLine("[InternetShortcut]");
@@ -171,10 +195,10 @@ namespace xtrance
         {
             Log("Saving metabook : " + metaBook.ToString());
             string path = Sanitize(metaBook.Author) + @"\" + Sanitize(metaBook.Name);
-            Directory.CreateDirectory(path);
+            Directory.CreateDirectory(RootPath + path);
             if (metaBook.Data != null)
             {
-                Stream stream = File.Create(path + @"\" + "metadata.zip");
+                Stream stream = File.Create(RootPath + path + @"\" + "metadata.zip");
                 stream.Write(metaBook.Data, 0, metaBook.Data.Length);
                 stream.Close();
             }
@@ -236,7 +260,17 @@ namespace xtrance
                 }
             })
             { IsBackground = true }.Start();
-            
+
+        }
+
+        private void buttonDirectory_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+            dlg.InitialDirectory = textBoxDirectory.Text;
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                textBoxDirectory.Text = dlg.SelectedPath;
+            }
         }
     }
 }
