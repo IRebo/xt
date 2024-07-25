@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,6 +7,7 @@ using System.Windows.Forms;
 using Windows.ApplicationModel;
 using Windows.Management.Deployment;
 using xtrance.Properties;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace xtrance
 {
@@ -36,11 +38,22 @@ namespace xtrance
                     PackageManager packageManager = new PackageManager();
                     Package currentPackage = packageManager.FindPackageForUser(string.Empty, Package.Current.Id.FullName);
 
-                    PackageUpdateAvailabilityResult status = currentPackage.CheckUpdateAvailabilityAsync().GetAwaiter().GetResult();
-                    labelUpdate.Invoke((Action)(() => labelUpdate.Text = status.Availability.ToString()));
-                    if (status.Availability == PackageUpdateAvailability.Required || status.Availability == PackageUpdateAvailability.Available)
+                    int retries = 5;
+                    while (retries >= 0)
                     {
-                        buttonUpdate.Invoke((Action)(() => buttonUpdate.Visible = true));
+
+                        PackageUpdateAvailabilityResult status = currentPackage.CheckUpdateAvailabilityAsync().GetAwaiter().GetResult();
+                        labelUpdate.Invoke((Action)(() => labelUpdate.Text = status.Availability.ToString()));
+                        if (status.Availability == PackageUpdateAvailability.NoUpdates)
+                        {
+                            break;
+                        }
+                        if (status.Availability == PackageUpdateAvailability.Required || status.Availability == PackageUpdateAvailability.Available)
+                        {
+                            buttonUpdate.Invoke((Action)(() => buttonUpdate.Visible = true));
+                            break;
+                        }
+                        retries--;
                     }
                 }
                 catch (Exception ex)
@@ -184,29 +197,46 @@ namespace xtrance
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            PackageManager pm = new PackageManager();
-            Package currentPackage = pm.FindPackageForUser(string.Empty, Package.Current.Id.FullName);
+            buttonOK.Enabled = false;
+            buttonCancel.Enabled = false;
 
-            var installTask = pm.AddPackageByAppInstallerFileAsync(
-                currentPackage.GetAppInstallerInfo().Uri,
-                AddPackageByAppInstallerOptions.ForceTargetAppShutdown,
-                pm.GetDefaultPackageVolume());
-
-            installTask.Progress = (installResult, progress) => labelUpdate.BeginInvoke(() =>
+            new Thread(() =>
             {
-                labelUpdate.Text = $"Progress: {progress.percentage} {progress.state}";
-            });
+                try
+                {
+                    PackageManager pm = new PackageManager();
+                    Package currentPackage = pm.FindPackageForUser(string.Empty, Package.Current.Id.FullName);
 
-            var res = installTask.GetAwaiter().GetResult();
+                    var installTask = pm.AddPackageByAppInstallerFileAsync(
+                        currentPackage.GetAppInstallerInfo().Uri,
+                        AddPackageByAppInstallerOptions.ForceTargetAppShutdown,
+                        pm.GetDefaultPackageVolume());
 
-            if (res.IsRegistered == true)
-            {
-                uint res2 = RelaunchHelper.RegisterApplicationRestart(null, RelaunchHelper.RestartFlags.NONE);
-                labelUpdate.Text = "Please close the application to update";
-            } else
-            {
-                labelUpdate.Text = $"Error {res.ErrorText}";
-            }
+                    installTask.Progress = (installResult, progress) => labelUpdate.BeginInvoke(() =>
+                    {
+                        labelUpdate.Invoke((Action)(() => labelUpdate.Text = $"Progress: {progress.percentage} {progress.state}"));
+                    });
+
+                    var res = installTask.GetAwaiter().GetResult();
+
+                    uint res2 = RelaunchHelper.RegisterApplicationRestart(null, RelaunchHelper.RestartFlags.NONE);
+                    
+
+                    if (res.IsRegistered == true)
+                    {
+                        labelUpdate.Invoke((Action)(() => labelUpdate.Text = "Status ok. Application should automatically restart..."));
+                    }
+                    else
+                    {
+                        labelUpdate.Invoke((Action)(() => labelUpdate.Text = $"Error {res.ErrorText}"));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    labelUpdate.Invoke((Action)(() => labelUpdate.Text = $"Error {ex.Message}"));
+                }
+            })
+            { IsBackground = true }.Start();
             
         }
     }
