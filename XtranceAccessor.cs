@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using HtmlAgilityPack;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace xtrance
 {
@@ -17,6 +18,7 @@ namespace xtrance
         private Log.LogFunction _logFunction;
         private WebClientEx _webClient;
         private int _serverId;
+        private CancellationToken _token;
 
         public XtranceAccessor(string urlbase, Log.LogFunction logFunction, int serverId, CancellationToken token)
         {
@@ -24,6 +26,7 @@ namespace xtrance
             _logFunction = logFunction;
             _urlbase = urlbase;
             _serverId = serverId;
+            _token= token;
         }
 
         public async Task LogingAndGetCookie(string username, string password)
@@ -83,11 +86,15 @@ namespace xtrance
         {
             Books bookDict = new Books();
             string result = await _webClient.DownloadStringTaskAsync(_urlbase + "/new/?mainpage=nov&nov_view=2");
-
             int bookIndex = 0;
 
-            for (int page = from; page <= to; page++)
+            await Parallel.ForAsync(from, to + 1, new ParallelOptions()
             {
+                MaxDegreeOfParallelism = 5
+            }, async (page, ct) =>
+            {
+                _token.ThrowIfCancellationRequested();
+                //Thread.Sleep(sleeptime);
                 result = await _webClient.DownloadStringTaskAsync(_urlbase + "/new/?mainpage=nov&subpage=&id=0&nov_ebk_page=" + page);
                 HtmlDocument htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(result);
@@ -108,7 +115,7 @@ namespace xtrance
                         bookDict.Add(id, new Book() { Id = id, Index = bookIndex });
                     }
                 }
-            }
+            });
             _logFunction("found " + bookDict.Count + " books...");
             return bookDict;
         }

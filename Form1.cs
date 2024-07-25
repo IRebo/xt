@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HtmlAgilityPack;
 using Windows.ApplicationModel;
 using Windows.Management.Deployment;
 using xtrance.Properties;
@@ -45,6 +46,7 @@ namespace xtrance
             textBoxDirectory.Text = Properties.Settings.Default.FilesPath;
             textBoxDirectory.TextChanged += TextBox_TextChanged;
 
+            buttonOK.Enabled = true; buttonCancel.Enabled = false;
 
 
             new Thread(() =>
@@ -85,7 +87,7 @@ namespace xtrance
             { IsBackground = true }.Start();
         }
 
-        private string RootPath => textBoxDirectory.Text+ @"\";
+        private string RootPath => @"\\?\"+textBoxDirectory.Text+ @"\";
 
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
@@ -111,6 +113,7 @@ namespace xtrance
             string user = textBoxUser.Text;
             string pass = textBoxPassword.Text;
             int serverId = Int32.Parse(textBoxServer.Text);
+            buttonOK.Enabled = false; buttonCancel.Enabled = true;
 
             _task = Task.Run(async () =>
             {
@@ -171,7 +174,11 @@ namespace xtrance
                 {
                     Log(ex.ToString());
                 }
-            }, _cancellationToken.Token).ContinueWith(_ => Log("done"));
+            }, _cancellationToken.Token).ContinueWith(_ => {
+                Log("done");
+                buttonOK.Invoke((Action)(() => buttonOK.Enabled = true));
+                buttonCancel.Invoke((Action)(() => buttonCancel.Enabled = false));
+            });
         }
 
         private void SaveBook(Book book)
@@ -195,6 +202,7 @@ namespace xtrance
         {
             Log("Saving metabook : " + metaBook.ToString());
             string path = Sanitize(metaBook.Author) + @"\" + Sanitize(metaBook.Name);
+            
             Directory.CreateDirectory(RootPath + path);
             if (metaBook.Data != null)
             {
@@ -216,7 +224,12 @@ namespace xtrance
 
         private string Sanitize(string input)
         {
-            return String.Join("_", input.Split(Path.GetInvalidFileNameChars())).TrimEnd('.').Trim();
+            string s = String.Join("_", input.Split(Path.GetInvalidFileNameChars())).TrimEnd('.').Trim();
+            if (s.Length > 250)
+            {
+                s = s.Substring(0, 250);
+            }
+            return s;
         }
 
         private void buttonUpdate_Click(object sender, EventArgs e)
