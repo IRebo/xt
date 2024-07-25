@@ -204,6 +204,8 @@ namespace xtrance
             {
                 try
                 {
+                    RelaunchHelper.RegisterApplicationRestart(null, RelaunchHelper.RestartFlags.NONE);
+
                     PackageManager pm = new PackageManager();
                     Package currentPackage = pm.FindPackageForUser(string.Empty, Package.Current.Id.FullName);
 
@@ -218,9 +220,6 @@ namespace xtrance
                     });
 
                     var res = installTask.GetAwaiter().GetResult();
-
-                    uint res2 = RelaunchHelper.RegisterApplicationRestart(null, RelaunchHelper.RestartFlags.NONE);
-                    
 
                     if (res.IsRegistered == true)
                     {
