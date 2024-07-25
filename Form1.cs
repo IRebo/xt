@@ -49,7 +49,6 @@ namespace xtrance
                 }
             })
             { IsBackground = true }.Start();
-
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
