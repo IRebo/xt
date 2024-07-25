@@ -58,6 +58,7 @@ namespace xtrance
 
                     while (true)
                     {
+                        labelUpdate.Invoke((Action)(() => labelUpdate.Text = "Checking status..."));
                         PackageUpdateAvailabilityResult status = currentPackage.CheckUpdateAvailabilityAsync().GetAwaiter().GetResult();
 
                         if (status.Availability == PackageUpdateAvailability.Unknown)
@@ -130,7 +131,7 @@ namespace xtrance
 
                     await Parallel.ForEachAsync(books.Values, new ParallelOptions()
                     {
-                        MaxDegreeOfParallelism = 5
+                        MaxDegreeOfParallelism = 1
                     }, async (book, ct) =>
                     {
                         _cancellationToken.Token.ThrowIfCancellationRequested();
@@ -228,7 +229,12 @@ namespace xtrance
 
         private string Sanitize(string input)
         {
+            if (string.IsNullOrEmpty(input))
+            {
+                input = "No_Author";
+            }
             string s = String.Join("_", input.Split(Path.GetInvalidFileNameChars())).TrimEnd('.').Trim();
+
             if (s.Length > 250)
             {
                 s = s.Substring(0, 250);

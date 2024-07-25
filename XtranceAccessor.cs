@@ -22,7 +22,7 @@ namespace xtrance
 
         public XtranceAccessor(string urlbase, Log.LogFunction logFunction, int serverId, CancellationToken token)
         {
-            _webClient = new WebClientEx(logFunction, Encoding.UTF8, 15*1000, token);
+            _webClient = new WebClientEx(logFunction, Encoding.UTF8, 25*1000, token);
             _logFunction = logFunction;
             _urlbase = urlbase;
             _serverId = serverId;
