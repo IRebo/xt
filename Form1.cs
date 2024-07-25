@@ -177,7 +177,7 @@ namespace xtrance
         private void SaveBook(Book book)
         {
             Log("Saving book : " + book.ToString());
-            string path = "Sanitize(book.Parent.Author) + @"\" + Sanitize(book.Parent.Name);
+            string path = Sanitize(book.Parent.Author) + @"\" + Sanitize(book.Parent.Name);
             Directory.CreateDirectory(RootPath + path);
             Stream stream = File.Create(RootPath + path + @"\" + Sanitize(book.Revision) + " - " + Sanitize(book.Format) + ".url");
             StreamWriter sw = new StreamWriter(stream);
